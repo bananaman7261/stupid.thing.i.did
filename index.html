@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damien to google</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            transition: opacity 0.5s ease;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="text"]:focus {
+            transform: none;
+        }
+
+        .disappear {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="searchEngineName">Damien to google</h1>
+
+    <div class="search-container">
+<form id="searchForm" action="https://www.google.com/search" method="get" target="_blank">
+            <input type="text" id="searchInput" name="q" placeholder="Enter your search query">
+            <button type="submit" id="searchButton" disabled>Search</button>
+        </form>
+    </div>
+
+    <script>
+        const searchEngineName = document.getElementById('searchEngineName');
+        const searchBar = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        let typingTimer;
+
+        // Enable search button when search bar has input after 1 second delay
+        searchBar.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(function() {
+                if (searchBar.value.trim() !== '') {
+                    searchButton.removeAttribute('disabled');
+                } else {
+                    searchButton.setAttribute('disabled', 'true');
+                }
+            }, 1000); // 1-second delay
+        });
+
+        // Apply disappearing effect to the search engine name
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            searchEngineName.classList.add('disappear');
+            setTimeout(function() {
+                searchEngineName.style.display = 'none';
+            }, 1000); // Hide after 1 second
+        });
+    </script>
+</body>
+</html>)
